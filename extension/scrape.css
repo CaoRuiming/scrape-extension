@@ -1,0 +1,73 @@
+:root {
+  --primary-bg-color: hsl(0, 0%, 98%);
+  --hover-bg-color: hsl(0, 0%, 90%);
+  --card-bg-color: hsl(0, 0%, 96%);
+  --border-color: hsl(0, 0%, 60%);
+  --faint-border-color: hsl(0, 0%, 80%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: var(--primary-bg-color);
+  text-align: center;
+}
+
+.hr {
+  width: 100%;
+  border-top: 2px solid hsl(0, 0%, 10%);
+  margin: 4px 0;
+}
+
+button {
+  outline: none;
+  border: 1px solid transparent;
+  width: 100%;
+  padding: 4px;
+  font-size: 1.5em;
+  text-align: center;
+  background-color: var(--primary-bg-color);
+}
+button:hover {
+  background-color: var(--hover-bg-color);
+}
+button:active {
+  outline: none;
+  background: transparent;
+  border: 1px solid var(--border-color);
+}
+
+input {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 4px;
+  font-size: 1.5em;
+  border: 1px solid var(--faint-border-color);
+}
+
+#popup-page {
+  width: 200px;
+  margin: 0;
+  padding: 0;
+}
+
+.option-cards-wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.option-card {
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  margin: 20px;
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+}
+.option-card button {
+  border: 1px solid var(--border-color);
+}

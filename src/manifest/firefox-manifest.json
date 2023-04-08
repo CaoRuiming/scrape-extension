@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Scrape",
+  "version": "1.0",
+  "description": "A simple text scraping extension.",
+  "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
+  },
+  "action": {
+    "browser_style": true,
+    "default_popup": "html/popup.html",
+    "default_icon": "icon.svg"
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": ["js/Background.js"],
+    "type": "module"
+  },
+  "permissions": ["notifications", "storage", "scripting", "tabs", "activeTab"],
+  "commands": {
+    "scrape": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "Scrape text from current page."
+    }
+  }
+}
