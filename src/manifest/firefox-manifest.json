@@ -28,5 +28,10 @@
       },
       "description": "Scrape text from current page."
     }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "scrape@dummy.com"
+    }
   }
 }
