@@ -14,7 +14,8 @@ function scrapeFunc(queryString: string): string {
     .filter((x) => x?.length && x.length > 2)
     .join("\n")
     // collapse consecutive newlines
-    .replaceAll(/(\n)((.{1})?(\n))*/g, "\n");
+    .replaceAll(/(\n)((.{1})?(\n))*/g, "\n")
+    .trim();
   navigator.clipboard.writeText(result);
   console.log(result);
   return result;
