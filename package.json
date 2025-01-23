@@ -4,22 +4,19 @@
   "description": "A simple text scraping extension.",
   "scripts": {
     "build": "./build.sh",
-    "lint": "npx eslint \"src/**\"",
+    "lint": "npx eslint \"src/Util.ts\"",
     "lint-fix": "npx eslint \"src/**\" --fix",
     "format": "npx prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Raymond Cao",
   "license": "MIT",
+  "type": "module",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.13.0",
-    "@typescript-eslint/parser": "^5.13.0",
-    "eslint": "^8.10.0",
-    "eslint-config-prettier": "^8.8.0",
-    "prettier": "2.8.7"
+    "@types/chrome": "^0.0.299",
+    "prettier": "3.4.2"
   },
   "dependencies": {
-    "@types/chrome": "^0.0.228",
-    "typescript": "^5.0.3"
+    "typescript": "^5.7.3"
   }
 }
