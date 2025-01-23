@@ -4,8 +4,6 @@
   "description": "A simple text scraping extension.",
   "scripts": {
     "build": "./build.sh",
-    "lint": "npx eslint \"src/Util.ts\"",
-    "lint-fix": "npx eslint \"src/**\" --fix",
     "format": "npx prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
