@@ -71,7 +71,7 @@ export function errorToString(error: unknown): string {
  */
 export async function downloadBlob(
   blob: Blob,
-  filename = "file.txt"
+  filename = "file.txt",
 ): Promise<void> {
   const url = URL.createObjectURL(blob);
   const params: chrome.downloads.DownloadOptions = {
@@ -92,6 +92,6 @@ export async function downloadBlob(
           }
         }
       });
-    })
+    }),
   );
 }
