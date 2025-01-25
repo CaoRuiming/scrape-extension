@@ -2,3 +2,5 @@
 node_modules
 extension/js
 extension/manifest.json
+scrape-extension.chrome.zip
+scrape-extension.firefox.xpi
