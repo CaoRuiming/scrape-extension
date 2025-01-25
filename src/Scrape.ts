@@ -1,37 +1,61 @@
+import DataStoreService from "./DataStoreService.js";
+import { getScraperFromName, Scraper } from "./Scrapers.js";
 import SettingsService from "./SettingsService.js";
 import { getActiveTabId } from "./Util.js";
 
 /**
- * Scraping script that is injected into the active tab. Saves result to
- * clipboard and logs to console.
- * @param queryString
- * @returns scraped text
+ * Run the currently active {@link Scraper} on the active tab and saves the
+ * scraped data into browser local storage ({@link DataStore}).
  */
-function scrapeFunc(queryString: string): string {
-  const result = Array.from(document.body.querySelectorAll(queryString))
-    .map((x) => x.textContent)
-    // remove suspiciously short lines
-    .filter((x) => x?.length && x.length > 2)
-    .join("\n")
-    // collapse consecutive newlines
-    .replaceAll(/(\n)((.{1})?(\n))*/g, "\n")
-    .trim();
-  navigator.clipboard.writeText(result);
-  console.log(result);
-  return result;
-}
-
-export async function scrape(): Promise<void> {
-  const { queryString } = await SettingsService.getSettings();
-  const { result } = (
+export async function scrape(): Promise<{
+  id: string;
+  content: string;
+}> {
+  const { scraperArg, currentScraperName } =
+    await SettingsService.getSettings();
+  const scraper = getScraperFromName(currentScraperName);
+  const { result: content } = (
     await chrome.scripting.executeScript({
       target: { tabId: await getActiveTabId() },
-      func: scrapeFunc,
-      args: [queryString],
+      func: scraper.getContent,
+      args: [scraperArg],
     })
   )[0];
 
-  if (!result) {
+  const { result: id } = (
+    await chrome.scripting.executeScript({
+      target: { tabId: await getActiveTabId() },
+      func: scraper.getId,
+    })
+  )[0];
+
+  if (!id || !content) {
     throw new Error("No results from scrape");
   }
+
+  await DataStoreService.saveScrapedData(id, content);
+
+  return { id, content };
+}
+
+/**
+ * Retrieve the scrape id for the currently active {@link Scraper} on the active
+ * tab.
+ * @returns Scrape id that can be used to index into {@link DataStore}.
+ */
+export async function getScrapeId(): Promise<string> {
+  const { currentScraperName } = await SettingsService.getSettings();
+  const scraper = getScraperFromName(currentScraperName);
+  const { result: id } = (
+    await chrome.scripting.executeScript({
+      target: { tabId: await getActiveTabId() },
+      func: scraper.getId,
+    })
+  )[0];
+
+  if (!id) {
+    throw new Error("Unable to get scrape id for active tab");
+  }
+
+  return id;
 }
