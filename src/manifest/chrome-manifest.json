@@ -19,7 +19,15 @@
     "service_worker": "js/Background.js",
     "type": "module"
   },
-  "permissions": ["notifications", "storage", "scripting", "tabs", "activeTab"],
+  "permissions": [
+    "downloads",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "scripting",
+    "tabs",
+    "activeTab"
+  ],
   "commands": {
     "scrape": {
       "suggested_key": {
